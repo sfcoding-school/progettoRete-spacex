@@ -1,0 +1,104 @@
+#etc/named.conf del DNS interno nell'edificio B
+
+# def opzioni globali di bind
+
+options {
+    directory "/etc/namedb";
+    pid-file "named.pid";
+	allow-query {
+		any;
+	};
+    forwarders {
+    	8.8.8.8;
+		8.8.4.4;
+	};
+	recursion no;
+};
+
+#Zona contenente i root DNS
+
+zone "." IN {
+	type hint; #quando si avvia un root nameserver, hint va ad indicare a named 
+		   #da che punto iniziare a cercare la lista dei root nameserver
+	file "name.ca"; #questo è il file che contiene tutti i dati sulla risoluzione nome/indirizzo IP
+};
+
+#zona mapping diretto di localhost
+zone "localhost" IN {
+	type master;
+	file "localhost.local";
+	notify no;
+};
+
+#zona mapping inverso dell'indirizzo 127.0.0.1
+zone "0.0.127.in-addr.arpa" IN {
+	type master;
+	file "0.0.127.local";
+	notify no;
+};
+
+
+#definizione dominio
+zone "spacex.com" {
+	type slave;
+    masters { 192.1.1.5; };
+    file "spacex.zone";
+};
+
+#edifici
+zone "eda" {
+    type master;
+    file "edicifi/edA.zone";
+};
+
+zone "edb" {
+    type master;
+    file "edicifi/edB.zone";
+};
+
+zone "edc" {
+    type master;
+    file "edicifi/edC.zone";
+};
+
+zone "edd" {
+    type master;
+    file "edicifi/edD.zone";
+};
+
+zone "ede" {
+    type master;
+    file "edicifi/edE.zone";
+};
+
+#servizi interni
+zone "pservice" { 
+     type master; 
+     file "pservice.zone";  
+};
+
+#reverse mapping per servizi esterni 
+zone "1.192.in-addr.arpa" { 
+     type master; 
+     file "edA.rev";  
+};
+
+zone "2.192.in-addr.arpa" { 
+     type master; 
+     file "edB.rev";  
+};
+
+zone "3.192.in-addr.arpa" { 
+     type master; 
+     file "edC.rev";  
+};
+
+zone "4.192.in-addr.arpa" { 
+     type master; 
+     file "edD.rev";  
+};
+
+zone "5.192.in-addr.arpa" { 
+     type master; 
+     file "edE.rev";  
+};

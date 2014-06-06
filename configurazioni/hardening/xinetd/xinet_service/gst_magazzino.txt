@@ -1,0 +1,10 @@
+service gst_magazzinod
+{
+        disable         = no
+        flags           = REUSE
+        socket_type     = stream
+        wait            = no
+        user            = gst_magazzino
+        server          = /usr/sbin/gst_magazzinod
+        access_times    = 05:00-19:00
+}

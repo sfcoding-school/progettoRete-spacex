@@ -1,0 +1,43 @@
+#Configurazione del Router GrassHopper tramite protocollo RIP.
+#Router Edificio C
+
+interfaces{ 
+ interface 192.3.6.1 active;      # Verso edificio B
+ interface 192.3.5.1 active;      # Verso edificio C
+ interface 192.3.1.1 passive;    # Verso Sottorete Piano T
+ interface 192.3.2.1 passive;    # Verso Sottorete Piano 1
+ interface 192.3.3.1 passive;    # Verso Sottorete Piano 2
+ interface 192.3.4.1 passive;    # Verso Sottorete Piano 3
+ interface 192.3.7.1 passive;     # hotspot wifi
+
+rip yes { 
+            broadcast; 
+            interface 192.1.5.1 { 
+                     version 2 
+                     multicast 
+                     authentication simple "RIPauth"; 
+           } 
+
+            interface 192.1.6.1 { 
+                     version 2 
+                     multicast 
+                     authentication simple "RIPauth"; 
+           } 
+} 
+
+export proto rip metric 0 { 
+            proto direct interface 192.3.1.1 { 
+                     network 192.3.1.0};
+            
+            proto direct interface 192.3.2.1 { 
+                     network 192.3.2.0};
+            
+            proto direct interface 192.3.3.1 { 
+                     network 192.3.3.0};
+                     
+            proto direct interface 192.3.4.1 { 
+                     network 192.3.4.0};
+            
+            proto direct interface 192.3.7.1 { 
+                     network 192.3.7.0};
+}; 

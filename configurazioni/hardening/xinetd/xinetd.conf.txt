@@ -1,0 +1,10 @@
+# File principale di configurazione del demone xinetd
+defaults{
+    instances = 60                 	#numero massimo di istanze per ogni servizio;
+    log_type = SYSLOG authpriv		#tipo di logging;
+    log_on_success = HOST PID 		#informazioni da inserire nei log;
+    log_on_failure = HOST    		#informazioni da inserire nei log;
+    cps = 25 30                     #max connessioni per sec e tempo di attesa (wait time);
+}
+
+includedir /etc/xinetd.d		#directory per leggere i file di configurazione dei singoli 

@@ -1,0 +1,10 @@
+service sshd
+{
+        disable         = no
+        flags           = REUSE
+        socket_type     = stream
+        wait            = no
+        user            = root
+        server          = /usr/bin/sshd
+        access_times    = 08:00-19:00
+}

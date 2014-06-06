@@ -1,0 +1,18 @@
+$ttl 86400
+$origin 1.1.192.in-addr.arpa.
+@       IN      SOA   dns.spacex.com    hostmaster (
+                2014051701 ; Serial   
+                86400      ; Refresh  
+                3600       ; Retry    
+                604800     ; Expire   
+                86400      ; Minimum  
+                )
+
+;definizione name server e server di mail
+    	IN      NS      dns.spacex.com.
+		IN      MX      5 smtp.spacex.com.
+
+;Definizione del server MAIL 
+3       IN      MX      smtp.spacex.com.
+;Definizione del server web
+4       IN      PTR     www.spacex.com.

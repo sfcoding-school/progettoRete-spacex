@@ -1,0 +1,36 @@
+#Configurazione del Router Delta tramite protocollo RIP.
+#Router Edificio B
+
+interfaces{ 
+ interface 192.2.5.1 active;     # Verso edificio C
+ interface 192.2.4.1 active;     # Verso edificio A
+ interface 192.2.1.1 passive;    # Verso Sottorete Servizi Interni
+ interface 192.2.2.1 passive;    # Verso Sottorete "40Host"
+ interface 192.2.3.1 passive;    # Verso Sottorete Ufficio Tecnico
+
+
+rip yes { 
+            broadcast; 
+            interface 192.2.5.1 { 
+                     version 2 
+                     multicast 
+                     authentication simple "RIPauth"; 
+           } 
+
+            interface 192.2.4.1 { 
+                     version 2 
+                     multicast 
+                     authentication simple "RIPauth"; 
+           } 
+} 
+
+export proto rip metric 0 { 
+            proto direct interface 192.2.1.1 { 
+                     network 192.2.1.0};
+            
+            proto direct interface 192.2.2.1 { 
+                     network 192.2.2.0};
+            
+            proto direct interface 192.2.3.1 { 
+                     network 192.2.3.0};
+}; 

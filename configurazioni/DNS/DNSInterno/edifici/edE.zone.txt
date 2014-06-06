@@ -1,0 +1,28 @@
+$TTL 2d
+$ORIGIN ede.
+@       IN      SOA     intdns.spacex.com. hostmaster (
+                2014060401 ; serial number
+                1d12h      ; refresh
+                15M        ; update retry
+                3W12h      ; expiry
+                2h20M      ; minimum
+                )
+        IN      NS      intdns.spacex.com.
+        
+;router
+saturn                  IN      A       192.5.1.1
+
+;rampa di lancio
+host1.rampa             IN      A       192.5.4.2
+...
+host20.rampa            IN      A       192.5.4.21
+
+;controllo Lancio
+host1.cntlancio         IN      A       192.5.1.2
+...
+host50.cntlancio        IN      A       192.5.1.51
+
+;ufficio emergenze
+host1.uffemergenze      IN      A       192.5.5.2
+...
+host30.uffemergenze     IN      A       192.5.5.31

@@ -1,0 +1,2 @@
+ifconfig eht0 79.54.3.7 netmask 255.0.0.0 broadcast 79.54.3.7    	    # Interfaccia verso Internet
+ifconfig eht1 192.1.1.2 netmask 255.255.255.0 broadcast 192.1.1.255		# Interfaccia verso DMZ

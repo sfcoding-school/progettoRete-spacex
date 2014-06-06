@@ -1,0 +1,34 @@
+#configurazione interior firewall dragon
+#interfaccia sulla dmz eth0
+#interfaccie interne eth1 eth2 eth3 eth4
+
+##svuota le catene 
+iptables -F FORWARD
+iptables -F INPUT
+iptables -F OUTPUT
+iptables -F PREROUTING
+iptables -F POSTROUTING
+
+##regola base scarta i pacchetti
+iptables -P FORWARD DROP
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -t nat -P PREROUTING DROP
+
+## rinomino le catene
+iptables -N lanToDmz #da !eth0 a eth1
+
+iptables -A FORWARD -i !eth0 -o eth0 -j lanToDmz
+
+##lanToDmz
+iptables -A lanToDmz -p tcp -dport 80 -j ACCEPT #accesso a tutti i servizi web tra cui il nostro web server
+iptables -A lanToDmz -d 192.1.1.3 -p tcp -dport 25 -j ACCEPT #smtp server mail
+iptables -A lanToDmz -d 192.1.1.3 -p tcp -dport 110 -j ACCEPT #accetta POP3 server mail
+iptables -A lanToDmz -d 192.1.1.5 -p tcp -dport 53 -j ACCEPT #dns server dnsE
+iptables -A lanToDmz -d 192.1.1.5 -p udp -dport 53 -j ACCEPT #dns server dnsE
+
+##accetta tutti i pacchetti da inoltrare con stato stabilito o collegato a connessioni gia iniziate
+iptables -A FORWARD -m state --state ESTABLISHED,RELATED -j ACCEPT
+
+##evita di rimanere bloccato su porte chiuse
+iptables -A FORWARD -p tcp -j REJECT --reject-with tcp-reset

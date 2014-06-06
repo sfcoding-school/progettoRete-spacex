@@ -1,0 +1,25 @@
+$ttl 86400
+$origin 2.192.in-addr.arpa.
+@       IN      SOA   intdns.spacex.com    hostmaster (
+                2014051701 ; Serial   
+                86400      ; Refresh  
+                3600       ; Retry    
+                604800     ; Expire   
+                86400      ; Minimum  
+                )
+
+;definizione name server
+        IN      NS      intdns.spacex.com.
+
+;router
+1.1     IN      PTR     delta.edb
+
+;Definizione ufficio tecnico 
+2.3     IN      PTR     host1.ufftecnico.edb
+...
+11.3    IN      PTR     host10.ufftecnico.edb
+
+;Definizione ufficio 40Host
+2.2     IN      PTR     host1.40host.eda
+...
+31.2    IN      PTR     host40.40host.eda

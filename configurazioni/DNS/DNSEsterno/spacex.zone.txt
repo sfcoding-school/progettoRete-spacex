@@ -1,0 +1,14 @@
+$TTL 2d
+$ORIGIN spacex.com.
+@       IN      SOA     dns.spacex.com. hostmaster (
+                2014060401 ; serial number
+                1d12h      ; refresh
+                15M        ; update retry
+                3W12h      ; expiry
+                2h20M      ; minimum
+                )
+        IN      NS      dns.spacex.com.
+        IN      MX      5 smtp.spacex.it. 
+
+www     IN      A       192.1.1.4
+mail    IN      A       192.1.1.3

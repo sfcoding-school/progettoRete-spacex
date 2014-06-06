@@ -1,0 +1,10 @@
+service gst_ricerched
+{
+        disable         = no
+        flags           = REUSE
+        socket_type     = stream
+        wait            = no
+        user            = gst_ricerche
+        server          = /usr/sbin/gst_ricerched
+        access_times    = 08:00-19:00
+}

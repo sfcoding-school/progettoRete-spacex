@@ -1,0 +1,36 @@
+#Configurazione del Router "Atlas" tramite protocollo RIP.
+#Router Edificio A
+
+interfaces{ 
+ interface 192.1.5.1 active;      # Verso edificio B
+ interface 192.1.4.1 active;      # Verso edificio E
+ interface 192.1.1.1 passive;    # Verso Sottorete DMZ
+ interface 192.1.2.1 passive;    # Verso Sottorete ufficio tecnico
+ interface 192.1.3.1 passive;    # Verso Sottorete "30Host"
+
+
+rip yes { 
+            broadcast; 
+            interface 192.1.5.1 { 
+                     version 2 
+                     multicast 
+                     authentication simple "RIPauth"; 
+           } 
+
+            interface 192.1.4.1 { 
+                     version 2 
+                     multicast 
+                     authentication simple "RIPauth"; 
+           } 
+} 
+
+export proto rip metric 0 { 
+            proto direct interface 192.1.1.1 { 
+                     network 192.1.1.0};
+            
+            proto direct interface 192.1.2.1 { 
+                     network 192.1.2.0};
+            
+            proto direct interface 192.1.3.1 { 
+                     network 192.1.3.0};
+}; 

@@ -1,0 +1,19 @@
+$TTL 2d
+$ORIGIN pservice.
+@           IN      SOA     intdns.spacex.com. hostmaster (
+                    2014060401 ; serial number
+                    1d12h      ; refresh
+                    15M        ; update retry
+                    3W12h      ; expiry
+                    2h20M      ; minimum
+                    )
+            IN      NS      intdns.spacex.com. 
+
+;web server interno
+www         IN      A   192.2.1.2
+
+;server di backup
+backup      IN      A   192.2.1.4
+
+;server per applicazioni aziendali
+app         IN      A   192.2.1.3

@@ -1,0 +1,33 @@
+$TTL 2d
+$ORIGIN edc.
+@       IN      SOA     intdns.spacex.com. hostmaster (
+                2014060401 ; serial number
+                1d12h      ; refresh
+                15M        ; update retry
+                3W12h      ; expiry
+                2h20M      ; minimum
+                )
+        IN      NS      intdns.spacex.com.
+ 
+;router
+grasshopper         IN      A       192.3.1.1
+
+;sale conferenze e ricevimento clienti
+host1.conferenze    IN      A       192.3.1.2
+...
+host30.conferenze   IN      A       192.3.1.31
+
+;sviluppo
+host1.sviluppo      IN      A       192.3.2.2
+...
+host150.sviluppo    IN      A       192.3.2.151
+
+;marketing
+host1.marketing     IN      A       192.3.3.2
+...
+host50.marketing    IN      A       192.3.3.51
+
+;amministrazione
+host1.amministrazione     IN      A       192.3.4.2
+...
+host30.amministrazione    IN      A       192.3.4.31

@@ -1,0 +1,23 @@
+$TTL 2d
+$ORIGIN edb.
+@       IN      SOA     intdns.spacex.com. hostmaster (
+                2014060401 ; serial number
+                1d12h      ; refresh
+                15M        ; update retry
+                3W12h      ; expiry
+                2h20M      ; minimum
+                )
+        IN      NS      intdns.spacex.com.
+        
+;router
+delta                   IN      A       192.2.1.1
+
+;ufficio Tecnico
+host1.ufftecnico        IN      A       192.2.3.2
+...
+host10.ufftecnico       IN      A       192.2.3.11
+
+;ufficio40Host
+host1.40host            IN      A       192.2.2.2
+...
+host40.40host           IN      A       192.2.2.41

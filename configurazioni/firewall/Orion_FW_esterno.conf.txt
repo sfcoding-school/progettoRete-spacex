@@ -1,0 +1,65 @@
+# configurazione dell'Exterior Router Orion
+# eth0 è interfaccia esterna
+# eth1 è interfaccia interna
+
+##svuota le catene 
+iptables -F FORWARD
+iptables -F INPUT
+iptables -F OUTPUT
+iptables -F PREROUTING
+iptables -F POSTROUTING
+
+##regola base scarta i pacchetti
+iptables -P FORWARD DROP
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -t nat -P PREROUTING DROP
+iptables -t nat -P POSTROUTING DROP
+
+## rinomino le catene solo per comodità
+iptables -N dmzToInt #dalla scheda di rete eth1 alla scheda di rete eth0 
+iptables -N intToDmz #dalla scheda di rete eth0 alla scheda di rete eth1 
+
+iptables -A FORWARD -i eth1 -o eth0 -j dmzToInet
+iptables -A FORWARD -i eth0 -o eth1 -j intToDmz
+
+##FILTRAGGIO DEI PACCHETTI
+##accetta connessioni che transitano nel mio firewall relative a protocolli conosciuti
+
+#intToDmz
+iptables -A intToDmz -p tcp -d 192.1.1.3 -dport 25 -j ACCEPT #server SMTP mail
+iptables -A intToDmz -p tcp -d 192.1.1.4 -dport 80 -j ACCEPT #server WEB web
+iptables -A intToDmz -p tcp -d 192.1.1.5 -dport 53 -j ACCEPT #server DNS dnsE
+iptables -A intToDmz -p udp -d 192.1.1.5 -dport 53 -j ACCEPT #server DNS dnsE
+
+##accetta tutti i pacchetti da inoltrare con stato stabilito o collegato a connessioni gia iniziate
+iptables -A intToDmz -m state --state ESTABLISHED,RELATED 
+
+##evita di rimanere bloccato su porte chiuse
+iptables -A intToDmz -p tcp -j REJECT --reject-with tcp-reset
+
+#dmzToInt
+iptables -A dmzToInt -p tcp -s 192.1.1.3 -dport 25 -j ACCEPT #server SMTP mail
+iptables -A dmzToInt -p udp -s 192.1.1.5 -dport 53 -j ACCEPT #server DNS dnsE
+iptables -A dmzToInt -p tcp -s 192.1.1.5 -dport 53 -j ACCEPT #server DNS dnsE
+iptables -A dmzToInt -p tcp -s 192.1.1.4 -dport 80 -j ACCEPT #server WEB web
+
+##accetta tutti i pacchetti da inoltrare con stato stabilito o collegato a connessioni gia iniziate 
+iptables -A dmzToInt -m state --state ESTABLISHED,RELATED -j ACCEPT 
+
+##evita di rimanere bloccato su porte chiuse
+iptables -A dmzToInt -p tcp -j REJECT --reject-with tcp-reset
+
+##NAT
+#INGRESSO
+
+#tutte le richieste http vengono dirottate trasparentemente a web-server
+iptables -t nat -A PREROUTING -i eth0 -d 79.54.3.7 -p tcp –dport 25 -j dnat –to-destination 192.1.1.3
+iptables -t nat -A PREROUTING -i eth0 -d 79.54.3.7 -p tcp –dport 80 -j dnat –to-destination 192.1.1.4
+iptables -t nat -A PREROUTING -i eth0 -d 79.54.3.7 -p tcp –dport 53 -j dnat –to-destination 192.1.1.5
+iptables -t nat -A PREROUTING -i eth0 -d 79.54.3.7 -p udp –dport 53 -j dnat –to-destination 192.1.1.5
+
+#USCITA
+# gli indirizzi della rete privata vengono mascherati # automaticamente senza specificarli con --to-source
+iptables -t nat -P POSTROUTING DROP
+iptables -t nat -A POSTROUTING -o eth1 -j MASQUERADE

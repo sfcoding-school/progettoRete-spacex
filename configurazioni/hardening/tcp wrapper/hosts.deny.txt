@@ -1,0 +1,7 @@
+# Vengono bloccati tutti gli accessi non consentiti esplicitamente nel file /etc/hosts.allow.
+# Ogni tentativo di accesso non autorizzato viene registrato in: "accesso_negato.log"
+# la prima parte indica i servizi da controllare. la seconda è l'elenco client. quello
+# si sta facendo è negare tutti i servizi a tutti i client e loggare i tentati accessi in un file.
+# eventuali eccezioni per l'accesso vanno indicate in host.allow. il %c indica di riportare quante piu informazioni
+# possibili sul client che ha tentato l'accesso
+ALL:ALL: spawn /bin/date %c >> /var/log/accesso_negato.log

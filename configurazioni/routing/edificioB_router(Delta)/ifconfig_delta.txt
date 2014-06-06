@@ -1,0 +1,8 @@
+#ifconfig router Delta
+#Edificio B
+
+ifconfig eth0 192.2.1.1 netmask 255.255.255.0 broadcast 192.2.1.255   #verso servizi interni
+ifconfig eth1 192.2.4.1 netmask 255.255.255.0 broadcast 192.2.4.255   #verso Edificio A
+ifconfig eth2 192.2.5.1 netmask 255.255.255.0 broadcast 192.2.5.255   #verso Edifico C
+ifconfig eth3 192.2.3.1 netmask 255.255.255.0 broadcast 192.2.3.255   #verso ufficio tecnico
+ifconfig eth4 192.2.2.1 netmask 255.255.255.0 broadcast 192.2.2.255   #verso "40Host"

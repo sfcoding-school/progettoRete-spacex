@@ -1,0 +1,20 @@
+# IFCONFIG.CF
+# Configurazione Interfaccia di Rete Edificio D 
+
+#---- SOTTORETE SVILUPPO
+ifconfig eth0 192.4.1.2 netmask 255.255.255.0 broadcast 192.4.1.255 #Host_01
+.
+.
+ifconfig eth0 192.4.1.41 netmask 255.255.255.0 broadcast 192.4.1.255 #Host_40
+
+#---- SOTTORETE TEST
+ifconfig eth0 192.4.5.2 netmask 255.255.255.0 broadcast 192.4.5.255 #Host_01
+.
+.
+ifconfig eth0 192.4.5.41 netmask 255.255.255.0 broadcast 192.4.5.255 #Host_40
+
+#---- SOTTORETE MAGAZZINO
+ifconfig eth0 192.4.4.2 netmask 255.255.255.0 broadcast 192.4.4.255 #Host_01
+.
+.
+ifconfig eth0 192.4.4.31 netmask 255.255.255.0 broadcast 192.4.4.255 #Host_30

@@ -1,0 +1,9 @@
+#ifconfig router Falcon
+#Edificio D
+
+ifconfig eth0 192.4.4.1 netmask 255.255.255.0 broadcast 192.4.4.255   #verso Edificio A
+ifconfig eth1 192.4.2.1 netmask 255.255.255.0 broadcast 192.4.2.255   #verso Edificio C
+ifconfig eth2 192.4.3.1 netmask 255.255.255.0 broadcast 192.4.3.255   #verso Edificio E (VPN)
+ifconfig eth3 192.4.1.1 netmask 255.255.255.0 broadcast 192.4.1.255   #verso sottorete "Sviluppo"
+ifconfig eth4 192.4.5.1 netmask 255.255.255.0 broadcast 192.4.5.255   #verso sottorete "Magazzino"
+ifconfig eth5 192.4.6.1 netmask 255.255.255.0 broadcast 192.4.6.255   #verso sottorete "Test"

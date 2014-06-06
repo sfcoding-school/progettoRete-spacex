@@ -1,0 +1,11 @@
+#ALIAS
+
+#alias amministratori
+
+amministratore_rete: lorenzo@spacex.com
+amministratore_sicurezza: luca@spacex.com
+hostmaster: hostmaster@spacex.com
+
+#mailing list
+
+admin: lorenzo@spacex.com, luca@spacex.com

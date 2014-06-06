@@ -1,0 +1,10 @@
+#ifconfig router GrassHopper
+#Edificio C
+
+ifconfig eth0 192.3.1.1 netmask 255.255.255.0 broadcast 192.3.1.255   #verso pianoT
+ifconfig eth1 192.3.4.1 netmask 255.255.255.0 broadcast 192.3.4.255   #verso piano3
+ifconfig eth2 192.3.5.1 netmask 255.255.255.0 broadcast 192.3.5.255   #verso Edifico B
+ifconfig eth3 192.3.3.1 netmask 255.255.255.0 broadcast 192.3.3.255   #verso piano2
+ifconfig eth4 192.3.2.1 netmask 255.255.255.0 broadcast 192.3.2.255   #verso piano1
+ifconfig eth5 192.3.6.1 netmask 255.255.255.0 broadcast 192.3.6.255   #verso Edificio C
+ifconfig eth6 192.3.7.1 netmask 255.255.255.0 broadcast 192.3.7.255   #sotto rete wifi

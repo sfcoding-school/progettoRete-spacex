@@ -1,0 +1,8 @@
+#ifconfig router Saturn
+#Edificio E
+
+ifconfig eth0 192.5.3.1 netmask 255.255.255.0 broadcast 192.5.3.255   #verso Edificio A (VPN)
+ifconfig eth1 192.5.2.1 netmask 255.255.255.0 broadcast 192.5.2.255   #verso Edificio D (VPN)
+ifconfig eth2 192.5.1.1 netmask 255.255.255.0 broadcast 192.5.1.255   #verso sottorete "Controllo Lancio"
+ifconfig eth3 192.5.4.1 netmask 255.255.255.0 broadcast 192.5.4.255   #verso sottorete "Rampa"
+ifconfig eth4 192.5.5.1 netmask 255.255.255.0 broadcast 192.5.5.255   #verso sottorete "Ufficio Emergenze"

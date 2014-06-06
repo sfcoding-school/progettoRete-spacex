@@ -1,0 +1,36 @@
+#Configurazione del Router "Saturn" tramite protocollo RIP.
+#Router Edificio E
+
+interfaces{ 
+ interface 192.5.3.1 active;      # Verso edificio A
+ interface 192.5.2.1 active;      # Verso edificio D
+ interface 192.5.1.1 passive;    # Verso Sottorete "Controllo Lancio"
+ interface 192.5.4.1 passive;    # Verso Sottorete "Rampa"
+ interface 192.5.5.1 passive;    # Verso Sottorete "Ufficio Emergenze"
+
+
+rip yes { 
+            broadcast; 
+            interface 192.5.3.1 { 
+                     version 2 
+                     multicast 
+                     authentication simple "RIPauth"; 
+           } 
+
+            interface 192.5.2.1 { 
+                     version 2 
+                     multicast 
+                     authentication simple "RIPauth"; 
+           } 
+} 
+
+export proto rip metric 0 { 
+            proto direct interface 192.5.1.1 { 
+                     network 192.5.1.0};
+            
+            proto direct interface 192.5.4.1 { 
+                     network 192.5.4.0};
+            
+            proto direct interface 192.5.5.1 { 
+                     network 192.5.5.0};
+}; 

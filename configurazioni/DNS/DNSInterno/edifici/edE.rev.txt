@@ -1,0 +1,30 @@
+$ttl 86400
+$origin 5.192.in-addr.arpa.
+@       IN      SOA   intdns.spacex.com    hostmaster (
+                2014051701 ; Serial   
+                86400      ; Refresh  
+                3600       ; Retry    
+                604800     ; Expire   
+                86400      ; Minimum  
+                )
+
+;definizione name server
+        IN      NS      intdns.spacex.com.
+
+;router
+1.1     IN      PTR     saturn.edb
+
+;rampa di lancio
+2.4     IN      PTR     host1.rampa.ede
+...
+21.4    IN      PTR     host20.rampa.ede
+
+;controllo Lancio
+2.1     IN      PTR     host1.cntlancio.ede
+...
+51.1    IN      PTR     host50.cntlancio.ede
+
+;ufficio emergenze
+2.5     IN      PTR     host1.uffemergenze.ede
+...
+31.5    IN      PTR     host30.uffemergenze.ede

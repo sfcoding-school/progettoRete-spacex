@@ -1,0 +1,53 @@
+#etc/named.conf del DNS nella DMZ dell'edificio A
+
+# def opzioni globali di bind
+
+options {
+    directory "/etc/namedb";
+	pid-file "named.pid";
+	allow-query {
+		any;
+	};
+    forwarders {
+		8.8.8.8;
+		8.8.4.4;
+	};
+	recursion no;
+    notify yes;
+    allow-transfer { 192.2.1.5; };
+};
+
+#Zona contenente i root DNS
+
+zone "." IN {
+	type hint; #quando si avvia un root nameserver, hint va ad indicare a named 
+		   #da che punto iniziare a cercare la lista dei root nameserver
+	file "name.ca"; #questo è il file che contiene tutti i dati sulla risoluzione nome/indirizzo IP
+};
+
+#zona mapping diretto di localhost
+zone "localhost" IN {
+	type master;
+	file "localhost.local";
+	notify no;
+};
+
+#zona mapping inverso dell'indirizzo 127.0.0.1
+zone "0.0.127.in-addr.arpa" IN {
+	type master;
+	file "0.0.127.local";
+	notify no;
+};
+
+
+#definizione dominio
+zone "spacex.com" {
+	type master;
+	file "spacex.zone";
+};
+
+#reverse mapping per servizi esterni 
+zone "1.1.192.in-addr.arpa" { 
+     type master; 
+     file "spacex.rev";
+};

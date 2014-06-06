@@ -1,0 +1,10 @@
+service gst_ammd
+{
+        disable         = no
+        flags           = REUSE
+        socket_type     = stream
+        wait            = no
+        user            = gst_amm
+        server          = /usr/sbin/gst_ammd
+        access_times    = 08:00-19:00
+}
