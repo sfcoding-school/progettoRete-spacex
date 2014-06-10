@@ -1,11 +1,9 @@
 #ALIAS
+mailer-daemon:      postmaster
+postmaster:	        root
+hostmaster:         root
 
-#alias amministratori
+amministratore_rete: lorenzo
+amministratore_sicurezza: luca
 
-amministratore_rete: lorenzo@spacex.com
-amministratore_sicurezza: luca@spacex.com
-hostmaster: hostmaster@spacex.com
-
-#mailing list
-
-admin: lorenzo@spacex.com, luca@spacex.com
+root: lorenzo, luca
